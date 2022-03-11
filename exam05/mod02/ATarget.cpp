@@ -10,7 +10,7 @@ ATarget::ATarget(ATarget const &other){
     *this = other;
 }
 
-ATarget &ATarget::operator=(ATarget const &other){
+ATarget&ATarget::operator=(ATarget const &other){
     this->type = other.type;
     return *this;
 }
@@ -18,9 +18,9 @@ ATarget &ATarget::operator=(ATarget const &other){
 ATarget::~ATarget(){}
 
 std::string ATarget::getType() const{
-    return (this->type);
+    return type;
 }
 
-void ATarget::getHitBySpell(const ASpell &spell) const{
-    std::cout << this->type << " has been " << spell.getEffects() << "!" << std::endl;
+void ATarget::getHitBySpell(ASpell const &spell) const{
+    std::cout << type << " has been " << spell.getEffects() << "!\n";
 }

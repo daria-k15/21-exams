@@ -3,27 +3,30 @@
 TargetGenerator::TargetGenerator(){}
 
 TargetGenerator::~TargetGenerator(){
+    std::map<std::string, ATarget *>::iterator it = tar.begin();
+    while (it != tar.end()){
+        delete it->second;
+        ++it;
+    }
     tar.clear();
 }
 
-void TargetGenerator::learnTargetType(ATarget* target){
-    tar.push_back(target->clone());
+void TargetGenerator::learnTargetType(ATarget *target){
+    if (target)
+        tar.insert(std::pair<std::string, ATarget *>(target->getType(), target->clone()));
 }
 
-void TargetGenerator::forgetTargetType(std::string const & name){
-    for(std::vector<ATarget*>::iterator it = tar.begin(); it < tar.end(); it++){
-        if ((*it)->getType() == name){
-            delete *it;
-            tar.erase(it);
-        }
-    }
+void TargetGenerator::forgetTargetType(const std::string &type){
+    std::map<std::string, ATarget *>::iterator it = tar.find(type);
+    if (it != tar.end())
+        delete it->second;
+    tar.erase(type);
 }
 
-ATarget* TargetGenerator::createTarget(std::string const & name){
-    for(std::vector<ATarget*>::iterator it = tar.begin(); it < tar.end(); it++){
-        if ((*it)->getType() == name){
-            return (*it);
-        }
-    }
+ATarget *TargetGenerator::createTarget(const std::string &type){
+    std::map<std::string, ATarget *>::iterator it = tar.find(type);
+    if (it != tar.end())
+        return tar[type];
     return NULL;
+
 }
