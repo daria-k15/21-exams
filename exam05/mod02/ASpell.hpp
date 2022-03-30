@@ -8,7 +8,6 @@ class ASpell{
     private:
         std::string name;
         std::string effects;
-
     public:
         ASpell(const std::string &name, const std::string &effects);
         ASpell(ASpell const &other);

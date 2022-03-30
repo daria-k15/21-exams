@@ -1,13 +1,10 @@
 #pragma once
 
 #include <iostream>
-#include <map>
 #include "ASpell.hpp"
 #include "ATarget.hpp"
 #include "SpellBook.hpp"
-class ASpell;
-class ATarget;
-class SpellBook;
+#include <map>
 
 class Warlock{
     private:

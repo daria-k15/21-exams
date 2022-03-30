@@ -16,16 +16,16 @@ void SpellBook::learnSpell(ASpell *spell){
         book.insert(std::pair<std::string, ASpell *>(spell->getName(), spell->clone()));
 }
 
-void SpellBook::forgetSpell(const std::string name){
+void SpellBook::forgetSpell(const std::string &name){
     std::map<std::string, ASpell *>::iterator it = book.find(name);
     if (it != book.end())
         delete it->second;
     book.erase(name);
 }
 
-ASpell* SpellBook::createSpell(const std::string &spell){
-    std::map<std::string, ASpell *>::iterator it = book.find(spell);
+ASpell *SpellBook::createSpell(const std::string &name){
+    std::map<std::string, ASpell *>::iterator it = book.find(name);
     if (it != book.end())
-        return book[spell];
+        return book[name];
     return NULL;
 }

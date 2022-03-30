@@ -9,5 +9,5 @@ class Dummy : public ATarget{
         Dummy();
         ~Dummy();
 
-        ATarget* clone() const;
+        ATarget *clone() const;
 };

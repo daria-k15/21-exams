@@ -1,5 +1,6 @@
 #include "ASpell.hpp"
 
+ASpell::ASpell(){}
 ASpell::ASpell(const std::string &name, const std::string &effects){
     this->name = name;
     this->effects = effects;
@@ -10,10 +11,8 @@ ASpell::ASpell(ASpell const &other){
 }
 
 ASpell&ASpell::operator=(ASpell const &other){
-    if (this != &other){
-        this->name = other.name;
-        this->effects = other.effects;
-    }
+    this->name = other.name;
+    this->effects = other.effects;
     return *this;
 }
 

@@ -9,5 +9,5 @@ class BrickWall : public ATarget{
         BrickWall();
         ~BrickWall();
 
-        ATarget* clone() const;
+        ATarget *clone() const;
 };

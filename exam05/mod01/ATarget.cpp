@@ -9,9 +9,7 @@ ATarget::ATarget(ATarget const &other){
 }
 
 ATarget&ATarget::operator=(ATarget const &other){
-    if (this != &other){
-        this->type = other.type;
-    }
+    this->type = other.type;
     return *this;
 }
 
