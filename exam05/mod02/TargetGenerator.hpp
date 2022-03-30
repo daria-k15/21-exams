@@ -1,24 +1,21 @@
-#ifndef TARGETGENERATOR_HPP
-#define TARGETGENERATOR_HPP
+#pragma once
 
 #include <iostream>
+#include <map>
 #include "ATarget.hpp"
-#include <vector>
-
+class ATarget;
 
 class TargetGenerator{
     private:
-        std::vector<ATarget*> tar;
-
+        std::map<std::string, ATarget *> tars;
         TargetGenerator(TargetGenerator const &other);
-        TargetGenerator &operator=(TargetGenerator const &other);
+        TargetGenerator&operator=(TargetGenerator const &other);
+
     public:
         TargetGenerator();
         ~TargetGenerator();
+
         void learnTargetType(ATarget *tar);
-        void forgetTargetType(std::string const &name);
-        ATarget *createTarget(std::string const &name);
-
+        void forgetTargetType(const std::string name);
+        ATarget* createTarget(const std::string &spell);
 };
-
-#endif

@@ -3,27 +3,29 @@
 SpellBook::SpellBook(){}
 
 SpellBook::~SpellBook(){
+    std::map<std::string, ASpell *>::iterator it = book.begin();
+    while (it != book.end()){
+        delete it->second;
+        ++it;
+    }
     book.clear();
 }
 
 void SpellBook::learnSpell(ASpell *spell){
-    book.push_back(spell->clone());
+    if (spell)
+        book.insert(std::pair<std::string, ASpell *>(spell->getName(), spell->clone()));
 }
 
-void SpellBook::forgetSpell(std::string const &name){
-    for (std::vector<ASpell*>::iterator it = book.begin(); it < book.end(); it++){
-        if ((*it)->getName() == name){
-            delete *it;
-            book.erase(it);
-        }
-    }
+void SpellBook::forgetSpell(const std::string name){
+    std::map<std::string, ASpell *>::iterator it = book.find(name);
+    if (it != book.end())
+        delete it->second;
+    book.erase(name);
 }
 
-ASpell *SpellBook::createSpell(std::string const &name){
-    for (std::vector<ASpell*>::iterator it = book.begin(); it < book.end(); it++){
-        if ((*it)->getName() == name){
-            return (*it);
-        }
-    }
+ASpell* SpellBook::createSpell(const std::string &spell){
+    std::map<std::string, ASpell *>::iterator it = book.find(spell);
+    if (it != book.end())
+        return book[spell];
     return NULL;
 }

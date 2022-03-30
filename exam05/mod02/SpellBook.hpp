@@ -1,23 +1,21 @@
-#ifndef SPELLBOOK_HPP
-#define SPELLBOOK_HPP
+#pragma once
 
 #include <iostream>
-#include <vector>
+#include <map>
 #include "ASpell.hpp"
+class ASpell;
 
 class SpellBook{
     private:
-        std::vector<ASpell*> book;
-
+        std::map<std::string, ASpell *> book;
         SpellBook(SpellBook const &other);
-        SpellBook &operator=(SpellBook const &other);
+        SpellBook&operator=(SpellBook const &other);
+
     public:
         SpellBook();
         ~SpellBook();
 
         void learnSpell(ASpell *spell);
-        void forgetSpell(std::string const &name);
-        ASpell* createSpell(std::string const &name);
+        void forgetSpell(const std::string name);
+        ASpell* createSpell(const std::string &spell);
 };
-
-#endif

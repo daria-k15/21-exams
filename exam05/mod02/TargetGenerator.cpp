@@ -3,27 +3,29 @@
 TargetGenerator::TargetGenerator(){}
 
 TargetGenerator::~TargetGenerator(){
-    tar.clear();
-}
-
-void TargetGenerator::learnTargetType(ATarget* target){
-    tar.push_back(target->clone());
-}
-
-void TargetGenerator::forgetTargetType(std::string const & name){
-    for(std::vector<ATarget*>::iterator it = tar.begin(); it < tar.end(); it++){
-        if ((*it)->getType() == name){
-            delete *it;
-            tar.erase(it);
-        }
+    std::map<std::string, ATarget *>::iterator it = tars.begin();
+    while (it != tars.end()){
+        delete it->second;
+        ++it;
     }
+    tars.clear();
 }
 
-ATarget* TargetGenerator::createTarget(std::string const & name){
-    for(std::vector<ATarget*>::iterator it = tar.begin(); it < tar.end(); it++){
-        if ((*it)->getType() == name){
-            return (*it);
-        }
-    }
+void TargetGenerator::learnTargetType(ATarget *tar){
+    if (tar)
+        tars.insert(std::pair<std::string, ATarget *>(tar->getType(), tar->clone()));
+}
+
+void TargetGenerator::forgetTargetType(const std::string name){
+    std::map<std::string, ATarget *>::iterator it = tars.find(name);
+    if (it != tars.end())
+        delete it->second;
+    tars.erase(name);
+}
+
+ATarget* TargetGenerator::createTarget(const std::string &spell){
+    std::map<std::string, ATarget *>::iterator it = tars.find(spell);
+    if (it != tars.end())
+        return tars[spell];
     return NULL;
 }

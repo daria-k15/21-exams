@@ -1,18 +1,12 @@
-#ifndef POLYMORPH_HPP
-#define POLYMORPH_HPP
+#pragma once
 
 #include "ASpell.hpp"
-
 class ASpell;
 
 class Polymorph : public ASpell{
     public:
         Polymorph();
-        Polymorph(Polymorph const &other);
-        Polymorph & operator=(Polymorph const &other);
-        virtual ~Polymorph();
+        ~Polymorph();
 
         ASpell* clone() const;
 };
-
-#endif
